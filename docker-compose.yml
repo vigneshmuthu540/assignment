@@ -3,16 +3,16 @@ version: '3.8'
 services:
 
   nginx:
-  image: nginx:1.25
-  container_name: nginx_server
-  ports:
-    - "80:80"
-  volumes:
-    - ./app:/var/www/html
-  depends_on:
-    - php
-  networks:
-    - app_network
+    image: nginx:1.25
+    container_name: nginx_server
+    ports:
+      - "80:80"
+    volumes:
+      - ./app:/var/www/html
+    depends_on:
+      - php
+    networks:
+      - app_network
 
   php:
     image: php:7.3-fpm
