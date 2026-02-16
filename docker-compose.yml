@@ -13,15 +13,15 @@ services:
     depends_on:
       - php
     networks:
-      - app-network
+      - app_network
 
   php:
-    build: ./php
+    image: php:7.3-fpm
     container_name: php_fpm
     volumes:
       - ./app:/var/www/html
     networks:
-      - app-network
+      - app_network
 
   mysql:
     image: mysql:8.0
@@ -29,7 +29,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: appdb
+      MYSQL_DATABASE: mydb
       MYSQL_USER: appuser
       MYSQL_PASSWORD: apppassword
     volumes:
@@ -37,7 +37,7 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - app-network
+      - app_network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -51,10 +51,10 @@ services:
     depends_on:
       - mysql
     networks:
-      - app-network
-
-networks:
-  app-network:
+      - app_network
 
 volumes:
   mysql_data:
+
+networks:
+  app_network:
